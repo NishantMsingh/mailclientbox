@@ -1,0 +1,29 @@
+.Signup-haveaccount{
+    background-color: rgb(135, 121, 214);
+    border-radius: 5px;
+    margin-top: 5px;
+    padding: 7px 0px;
+    text-align: center;
+    cursor: pointer;
+    max-width: 18rem;
+  min-width: 18rem;
+}
+.Signup-bg{
+background: linear-gradient(white,rgb(135, 121, 214));
+}
+.Signup-title{
+    color:rgb(135, 121, 214);
+}
+.Signup-inputbg:focus{
+    background: linear-gradient(white,rgb(135, 121, 214));
+}
+.Signup-haveaccount:hover{
+    background-color:rgb(114, 103, 177);
+}
+.Signup-form{
+  max-width: 18rem;
+  min-width: 18rem;
+}
+.Signup-font-weight{
+    font-weight: 500;
+}

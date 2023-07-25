@@ -1,0 +1,82 @@
+.auth-Toggle{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 10px 0px;
+    width: 300px;
+    font-weight: 500;
+    font-size: 18px;
+    user-select: none;
+   
+}
+.auth-login,
+.auth-signup {
+    position: relative; /* To make the ::after pseudo-element relative to these elements */
+    cursor: pointer;
+    color: white;
+}
+
+.active{
+    border-bottom: 5px solid rgba(255, 255, 255, 0.37);
+}
+.video-background {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+  }
+  
+  .video-background video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Make the video cover the entire container */
+  }
+  
+  /* Add your existing styles for .auth-login and .auth-signup here */
+  
+  /* Optionally, you can add an overlay to the video for better readability of the content */
+  .video-background::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Adjust the opacity as needed */
+  }
+
+
+
+.Auth-loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid rgb(112, 64, 201);
+  border-bottom: 16px solid rgb(112, 64, 201);
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 1s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.Auth-load-modal{
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #4d54be63;
+}
+  

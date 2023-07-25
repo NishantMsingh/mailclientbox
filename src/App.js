@@ -1,9 +1,15 @@
-
-import Signup from './Component/SignUp/Signup';
+import Auth from "./Component/Auth/Auth";
+import { Routes, Route } from 'react-router-dom';
+import Home from "./Component/Home/Home";
 
 function App() {
   return (
-    <Signup/>
+   
+
+    <Routes>
+      <Route path="/" element={ <Auth/>} />
+      <Route path="/Home" element={<Home />} />
+    </Routes>
   );
 }
 

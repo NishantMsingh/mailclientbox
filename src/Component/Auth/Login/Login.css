@@ -1,0 +1,70 @@
+.Login-haveaccount{
+    background-color: rgb(135, 121, 214);
+    border-radius: 5px;
+    margin-top: 5px;
+    padding: 7px 0px;
+    text-align: center;
+    cursor: pointer;
+    max-width: 18rem;
+  min-width: 18rem;
+}
+.Login-bg{
+background: linear-gradient(rgba(255, 255, 255, 0.452),rgba(135, 121, 214, 0.616));
+}
+.Login-title{
+    color:rgb(135, 121, 214);
+}
+.Login-inputbg:focus{
+    background: linear-gradient(rgba(255, 255, 255, 0.836),rgba(135, 121, 214, 0.616));
+}
+.Login-haveaccount:hover{
+    background-color:rgb(114, 103, 177);
+}
+.Login-form{
+  max-width: 18rem;
+  min-width: 18rem;
+}
+.Login-font-weight{
+    font-weight: 500;
+}
+/* Login.css */
+.modal {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    
+  }
+
+  .Login-loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid rgb(112, 64, 201);
+    border-bottom: 16px solid rgb(112, 64, 201);
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 1s linear infinite;
+  }
+  
+  @-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  .Login-load-modal{
+   position:absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #4d54be63;
+  }
+  .Login-show-password {
+    margin-top: 0.5rem;
+  }
+  .card {
+    background-color: transparent !important;
+}

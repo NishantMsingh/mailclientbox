@@ -1,0 +1,32 @@
+.Signup-haveaccount{
+    background-color: rgb(135, 121, 214);
+    border-radius: 5px;
+    margin-top: 5px;
+    padding: 7px 0px;
+    text-align: center;
+    cursor: pointer;
+    max-width: 18rem;
+  min-width: 18rem;
+}
+.Signup-bg{
+background: linear-gradient(rgba(255, 255, 255, 0.452),rgba(135, 121, 214, 0.616));
+}
+.Signup-title{
+    color:rgb(135, 121, 214);
+}
+.Signup-inputbg:focus{
+    background: linear-gradient(rgba(255, 255, 255, 0.836),rgba(135, 121, 214, 0.616));
+}
+.Signup-haveaccount:hover{
+    background-color:rgb(114, 103, 177);
+}
+.Signup-form{
+  max-width: 18rem;
+  min-width: 18rem;
+}
+.Signup-font-weight{
+    font-weight: 500;
+}
+.card {
+    background-color: transparent !important;
+}

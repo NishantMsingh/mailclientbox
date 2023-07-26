@@ -4,13 +4,17 @@ const mailSlice = createSlice({
   initialState: {
     allMails: [],
     sentMails:[],
-    receivedMails:[],
     deletedMails:[],
-    
   },
   reducers: {
     addMail(state, action) {
-      console.log(action.payload);
+      state.sentMails.push({...action.payload,sentid:"SENT0"+state.sentMails.length});
+    },
+    removeMail(state, action){
+      state.deletedMails.push({...action.payload,deleteid:"DEL0"+state.sentMails.length});
+      state.sentMails=state.sentMails.filter(value=>{
+        return value.sentid!==action.payload.sentid;
+      })
     }
   }
 });

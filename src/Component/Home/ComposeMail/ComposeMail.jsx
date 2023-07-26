@@ -32,6 +32,7 @@ const dispatch=useDispatch();
       .join('\n');
       let sender=localStorage.getItem("email");
       let mail={
+        name:"Unknow",
         sender,
         reciver:reciver.current.value,
         subject:subject.current.value,
@@ -47,6 +48,8 @@ const dispatch=useDispatch();
       toast.success("Mail sent successfully");
        dispatch(mailAction.addMail(mail));
       setEditorState("");
+      // props.onClick(false);
+      
   }
 
   return (

@@ -298,3 +298,8 @@
       position: relative;
     }
   }
+               .sent-mail-count,.delete-mail-count,.inbox-mail-count{
+                 padding-left: 10px;
+                 border-radius: 5px;
+                 color: rgb(226, 136, 136);
+               }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Home.css";
 import { FcUpLeft } from "react-icons/fc";
 import { RiSpam2Line, RiMessage2Fill } from "react-icons/ri";
@@ -18,6 +18,11 @@ import view from "../../Assets/view.png";
 import user from "../../Assets/user.png";
 import ComposeMail from "./ComposeMail/ComposeMail";
 import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { mailAction } from "../../Store/mail-slice";
+import { toast } from "react-toastify";
+
+
 const Home = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isActive, setIsActive] = useState(false);
@@ -25,7 +30,13 @@ const Home = () => {
   const [isStarred, setIsStarred] = useState(false);
   const [iscompose, setCompose] = useState(false);
   const [readmoode, setReadMode] = useState(false);
+  const [readmoodeValue, setReadModeValue] = useState("");
+  const [temp, setTemp] = useState([]);
   const currentDate = new Date();
+  const sentMails = useSelector((state) => state.mail.sentMails);
+  const allMails = useSelector((state) => state.mail.allMails);
+  const deletedMails = useSelector((state) => state.mail.deletedMails);
+  const dispatch=useDispatch();
   const navigate=useNavigate();
   const composehandle = (value) => {
     setCompose(value);
@@ -52,9 +63,22 @@ const Home = () => {
   const toggleStar = () => {
     setIsStarred((prevIsStarred) => !prevIsStarred);
   };
-
   const handleItemClick = (item) => {
     setActiveListItem(item);
+    setReadMode(false);
+    switch(item)
+    {
+      case "Inbox":setTemp(allMails);
+                  
+                   break;
+      case "Sent":setTemp(sentMails);
+      
+                   break;   
+      case "Deleted Items":setTemp(deletedMails);
+   
+                   break;
+      default:setTemp([]);
+    }
   };
 
   const toggleAccordion = () => {
@@ -66,13 +90,20 @@ const Home = () => {
   const readmodeHandler=()=>{
     setReadMode(false);
   }
-  const readModeActivehandler=()=>{
+  const readModeActivehandler=(value)=>{
     setReadMode(true);
+    setReadModeValue(value);
+    console.log(value);
   }
   const logoutHandler=()=>{
     localStorage.removeItem("idToken");
     localStorage.removeItem("email");
     navigate("/");
+  }
+  const deleteHandler=(value)=>{
+    dispatch(mailAction.removeMail(value));
+    toast.success("Deleted Successfully");
+    setTemp([]);
   }
   return (
     <div>
@@ -133,7 +164,7 @@ const Home = () => {
                   className={activeListItem === "Inbox" ? "list-active" : ""}
                   onClick={() => handleItemClick("Inbox")}
                 >
-                  Inbox
+                  Inbox <span className="inbox-mail-count">{allMails.length}</span>
                 </li>
                 <li
                   className={activeListItem === "Unread" ? "list-active" : ""}
@@ -157,7 +188,7 @@ const Home = () => {
                   className={activeListItem === "Sent" ? "list-active" : ""}
                   onClick={() => handleItemClick("Sent")}
                 >
-                  Sent
+                  Sent <span className="sent-mail-count">{sentMails.length}</span>
                 </li>
                 <li
                   className={activeListItem === "Spam" ? "list-active" : ""}
@@ -171,7 +202,7 @@ const Home = () => {
                   }
                   onClick={() => handleItemClick("Deleted Items")}
                 >
-                  Deleted Items
+                  Deleted Items <span className="delete-mail-count">{deletedMails.length}</span>
                 </li>
               </ul>
             </div>
@@ -263,31 +294,32 @@ const Home = () => {
               </div>
               {/* Mail Listes   the main mail */}
               <div className="mail-lists">
-                <ul>
-                  <li className="font-weight d-flex align-items-center justify-content-between font-reducer" onClick={readModeActivehandler}>
-                    <input type="checkbox" name="Select" id="Select" />
-                    <span className="bullet"></span>
-                    <span>Mark Jukerburg</span>
-                    <span
-                      className={isStarred ? "starred" : "star"}
-                      title="Mark as starred"
-                      onClick={toggleStar}
-                    ></span>
-                    <span className="title-mail-list">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Necessitatibus, impedit!
-                    </span>
-                    <span className="description-mail-list">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Necessitatibus, impedit!
-                    </span>
-                    <span className="mail-time">
-                      <span> {formattedTime}</span>
-                      {/* <span> {formattedDate}</span> */}
-                    </span>
-                  </li>
-                </ul>
-              </div>
+  {temp.length === 0 ? (
+    <h3>No Mails available</h3>
+  ) : (
+    <ul>
+      {temp.map((value) => (
+        <li className="font-weight d-flex align-items-center justify-content-between font-reducer" onClick={()=>{readModeActivehandler(value)}}>
+          <input type="checkbox" name="Select" id="Select" />
+          <span className="bullet"></span>
+          <span>{value.name}</span>
+          <span className={isStarred ? "starred" : "star"} title="Mark as starred" onClick={toggleStar}></span>
+          <span className="title-mail-list">
+          {value.subject}
+          </span>
+          <span className="description-mail-list">
+          {value.mail}
+          </span>
+          <span className="mail-time">
+            <span>{value.time}</span>
+            {/* <span>{formattedDate}</span> */}
+          </span>
+        </li>
+      ))}
+    </ul>
+  )}
+</div>
+
             </section>
           )}
           {readmoode &&<section className="bg-light list col-lg-10 col-md-12">
@@ -302,7 +334,7 @@ const Home = () => {
                 <span>
                   <RiSpam2Line />
                 </span>
-                <span>
+                <span onClick={()=>{deleteHandler(readmoodeValue)}}>
                   <AiFillDelete />
                 </span>
                 <span>
@@ -325,14 +357,14 @@ const Home = () => {
               <div className="mail-readmode-header">
                 <span title="Backward">&#60;</span>
                 <span title="Forward">&#62;</span>
-                <span title="Mail Count"> 1 0f 255 </span>
+                <span title="Mail Count">1 of {temp.length}</span>
               </div>
             </div>
             {/* Mail Listes   the main mail */}
             <div className="mail-readMod-container">
               <div className="mail-list-header d-flex align-items-center justify-content-between p-2 border-bottom">
                 <div className="mail-readmode-header">
-                  <span title="Subject of mail">Subject of the mail</span>
+                  <span title="Subject of mail">{readmoodeValue.subject}</span>
                   <span className="important-mail">important</span>
                   <span>inbox</span>
                 </div>
@@ -350,51 +382,14 @@ const Home = () => {
                 <span className="w-100">
                   <div className="d-flex align-items-center justify-content-between">
                     <span>Google Accounts Team </span>
-                    <span> 4:28 PM </span>
+                    <span> {readmoodeValue.time} </span>
                   </div>
                   <span>to me</span>
                 </span>
               </div>
 
               <div className="message-container">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Voluptas, quibusdam, laborum quas error voluptates sit vero
-                nulla laudantium doloribus velit, ab accusantium optio tempora.
-                Ducimus itaque sit deserunt dignissimos alias id eveniet, ipsam
-                consequatur debitis recusandae nemo sapiente ab voluptatibus,
-                sed culpa, officiis incidunt quaerat? Ad, at doloribus ab
-                deserunt error dolorem fugit tenetur veniam nam maxime eum rerum
-                totam, obcaecati placeat odit, accusamus velit aliquam
-                voluptatibus nobis eaque saepe tempore optio sunt! Aliquam,
-                minus. Beatae quo aperiam, rerum ipsa illum aliquid ea
-                voluptatum odit tenetur aspernatur deserunt inventore odio
-                animi? Laboriosam repudiandae nisi fuga quas alias sint est
-                repellendus quaerat delectus praesentium nesciunt sit tenetur
-                nam, fugit necessitatibus officiis ipsum dolore voluptatum? Fuga
-                quasi amet quisquam natus, maiores sint. Alias voluptas
-                adipisci, magnam mollitia quidem at impedit blanditiis inventore
-                sint velit necessitatibus recusandae aliquid tempora itaque,
-                est, fugiat ullam ut delectus quasi nesciunt atque fuga ipsum!
-                Ratione, quas veritatis? Molestias exercitationem iure
-                voluptate! Iste, vel vitae dolores neque nulla ipsam voluptate
-                perspiciatis corporis accusamus, magni maiores maxime quam fuga
-                ad quidem praesentium laboriosam voluptatem. Repellendus,
-                incidunt. Veniam maiores quisquam, praesentium, earum itaque
-                amet optio numquam deleniti adipisci quas aut, alias eveniet?
-                Officiis, ad ex minima voluptates dolorem sed aut nemo rerum
-                laborum exercitationem at dolore ratione facere aperiam eos
-                harum nam quos quod! Saepe cumque corporis placeat, architecto
-                veniam adipisci illum? Deleniti nulla, unde et repellat
-                repudiandae a hic doloribus corrupti? Ipsam, ad praesentium
-                culpa sunt enim saepe reiciendis laudantium eaque, quo
-                doloremque perspiciatis labore. Illum animi tempore, perferendis
-                itaque, vitae velit illo doloribus distinctio maiores ipsum,
-                ducimus consequuntur pariatur deserunt harum alias ad. Provident
-                quaerat praesentium rerum beatae sed ab eius sunt, veniam culpa
-                magni corporis incidunt quisquam nesciunt. Laudantium quam
-                repellat assumenda quaerat saepe incidunt quibusdam voluptate
-                impedit. Iusto illo libero doloremque autem animi rem, facere
-                nobis!
+                {readmoodeValue.mail}
               </div>
             </div>
             <div className="reply-btn p-3">

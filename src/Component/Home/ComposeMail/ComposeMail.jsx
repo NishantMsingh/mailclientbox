@@ -5,6 +5,9 @@ import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { EditorState,convertToRaw } from "draft-js";
 
+import { mailAction } from "../../../Store/mail-slice";
+import { useDispatch } from "react-redux";
+
 const ComposeMail = (props) => {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty()
@@ -12,6 +15,7 @@ const ComposeMail = (props) => {
 const [vis,setVisible]=useState(false);
 const reciver=useRef();
 const subject=useRef();
+const dispatch=useDispatch();
   const onEditorStateChange = (newEditorState) => {
     setEditorState(newEditorState);
     if(editorState)
@@ -39,9 +43,9 @@ const subject=useRef();
         send:true,
         receive:false
       }
-      console.log(mail);
-      toast.success("Mail sent successfully");
      
+      toast.success("Mail sent successfully");
+       dispatch(mailAction.addMail(mail));
       setEditorState("");
   }
 

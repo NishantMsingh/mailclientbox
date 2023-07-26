@@ -15,7 +15,9 @@ import travel from "../../Assets/travel.png";
 import subs from "../../Assets/subs.png";
 import deals from "../../Assets/deals.png";
 import view from "../../Assets/view.png";
+import user from "../../Assets/user.png";
 import ComposeMail from "./ComposeMail/ComposeMail";
+import { useNavigate } from "react-router";
 const Home = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isActive, setIsActive] = useState(false);
@@ -24,6 +26,7 @@ const Home = () => {
   const [iscompose, setCompose] = useState(false);
   const [readmoode, setReadMode] = useState(false);
   const currentDate = new Date();
+  const navigate=useNavigate();
   const composehandle = (value) => {
     setCompose(value);
   };
@@ -66,13 +69,18 @@ const Home = () => {
   const readModeActivehandler=()=>{
     setReadMode(true);
   }
+  const logoutHandler=()=>{
+    localStorage.removeItem("idToken");
+    localStorage.removeItem("email");
+    navigate("/");
+  }
   return (
     <div>
       {/* Header  */}
       <div className="container-fluid home-header-bg">
-        <header className="container pt-2 pb-2 row">
-          <div className="col-lg-3">
-            <div className="text-light font-weight d-flex flex-row align-items-center">
+        <header className="container-fluid pt-2 pb-2 align-items-center d-flex flex-row justify-content-between">
+          <div className="">
+            <div className="text-light font-weight d-flex flex-row align-items-center ">
               <div
                 className={isMenuOpen ? "change  ms-s me-3" : "disp ms-s me-3"}
                 onClick={handleMenuClick}
@@ -84,7 +92,7 @@ const Home = () => {
               <h1> Yahoo!!</h1>{" "}
             </div>{" "}
           </div>
-          <div class="search-container col-lg-9">
+          <div class="search-cantrol w-100 ms-5 ms-5">
             <input
               type="text"
               class="search-input font-weight"
@@ -104,12 +112,13 @@ const Home = () => {
               </svg>
             </button>
           </div>
+          <div className=""> <button className="logout" onClick={logoutHandler}>Log out</button></div>
         </header>
       </div>
       {/* Header  */}
       <div className="container-fluid mail-main">
         <div className="row">
-          <section className="menu col-lg-2  col-md-12 p-3">
+          <section className={isMenuOpen ? "menu col-lg-2  col-md-12 p-3 rad":"menu-disp menu col-lg-2  col-md-12 p-3 rad"}>
             <button
               className="compose font-weight text-light"
               onClick={() => {
@@ -228,8 +237,8 @@ const Home = () => {
             </div>
           </section>
           {!readmoode && (
-            <section className="list col-lg-10 col-md-12">
-              <div className="mail-list-header d-flex align-items-center justify-content-between p-2 border-bottom">
+            <section className="bg-light list col-lg-10 col-md-12 rad">
+              <div className="mail-list-header d-flex align-items-center justify-content-between p-2 border-bottom overflow-x-auto">
                 <div>
                   <input
                     type="checkbox"
@@ -255,10 +264,10 @@ const Home = () => {
               {/* Mail Listes   the main mail */}
               <div className="mail-lists">
                 <ul>
-                  <li className="font-weight d-flex align-items-center justify-content-between" onClick={readModeActivehandler}>
+                  <li className="font-weight d-flex align-items-center justify-content-between font-reducer" onClick={readModeActivehandler}>
                     <input type="checkbox" name="Select" id="Select" />
                     <span className="bullet"></span>
-                    <span> Mark Jukerburg</span>
+                    <span>Mark Jukerburg</span>
                     <span
                       className={isStarred ? "starred" : "star"}
                       title="Mark as starred"
@@ -274,15 +283,15 @@ const Home = () => {
                     </span>
                     <span className="mail-time">
                       <span> {formattedTime}</span>
-                      <span> {formattedDate}</span>
+                      {/* <span> {formattedDate}</span> */}
                     </span>
                   </li>
                 </ul>
               </div>
             </section>
           )}
-          {readmoode &&<section className="list col-lg-10 col-md-12">
-            <div className="mail-list-header d-flex align-items-center justify-content-between p-2 border-bottom">
+          {readmoode &&<section className="bg-light list col-lg-10 col-md-12">
+            <div className="mail-list-header d-flex align-items-center justify-content-between p-2 border-bottom ">
               <div className="mail-readmode-header">
                 <span onClick={readmodeHandler}>
                   <FcUpLeft />
@@ -314,9 +323,9 @@ const Home = () => {
               </div>
 
               <div className="mail-readmode-header">
-                <span>&#60;</span>
-                <span>&#62;</span>
-                <span> 1 0f 255 </span>
+                <span title="Backward">&#60;</span>
+                <span title="Forward">&#62;</span>
+                <span title="Mail Count"> 1 0f 255 </span>
               </div>
             </div>
             {/* Mail Listes   the main mail */}
@@ -335,7 +344,9 @@ const Home = () => {
               </div>
 
               <div className="mail-list-header p-3 font-weight d-flex flex-row justify-content-start">
-                <span className="user-circle">User</span>
+                
+                <img src={user} alt="xyz-damaged" className="user-img" />
+                
                 <span className="w-100">
                   <div className="d-flex align-items-center justify-content-between">
                     <span>Google Accounts Team </span>

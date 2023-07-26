@@ -1,0 +1,268 @@
+.home-header-bg{
+    background-color: blueviolet;
+}
+
+
+/* // Search  */
+.search-container {
+    display: flex;
+    align-items: center;
+    border: none;
+    border-radius: 8px;
+    overflow: hidden;
+    max-width: 300px; /* Adjust the width as per your layout */
+  }
+  
+  .search-input {
+    flex: 1;
+    border: none;
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 8px 0 0 8px;
+    width: 75%;
+    outline: none;
+  }
+  
+  .search-button {
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px 16px;
+    font-size: 16px;
+    border-radius: 0 8px 8px 0;
+    cursor: pointer;
+  }
+  
+  .search-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .search-container {
+    transition: max-width 0.3s ease-in-out;
+  }
+ 
+  
+  @media (max-width: 600px) {
+    .search-container {
+      max-width: 100%;
+    }
+  }
+  
+
+  /* Utilities  */
+  .font-weight{
+    font-weight: 500;
+}
+
+.menu{
+    background-color: #F4F4F7;
+}
+.menubar{
+    font-size: 12px;
+}
+.compose{
+    width: 100%;
+    background-color:#8A2BE2;
+    border-radius: 3px;
+    padding: 10px 0px;
+    border:none;
+}
+
+/* // Menul List  */
+.inbox-list {
+     width: 100%;; 
+  }
+ .menu-list{
+    margin: 0;
+    padding: 0;
+ } 
+.menu-list li {
+    list-style: none;
+
+    padding: 10px 0px 10px 4px;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 3px;
+  }
+.menu-list li:hover{
+    background-color: #8A2BE2;
+}
+.container {
+    display: inline-block;
+    cursor: pointer;
+  }
+  
+  .bar1, .bar2, .bar3 {
+    width: 35px;
+    height: 5px;
+    background-color: #ffffff;
+    margin: 6px 0;
+    transition: 0.4s;
+    border-radius: 5px;
+  }
+  
+  .change .bar1 {
+    transform: translate(0, 11px) rotate(-45deg);
+  }
+  .disp{
+    display: none;
+  }
+  .change .bar2 {opacity: 0;}
+  
+  .change .bar3 {
+    transform: translate(0, -11px) rotate(45deg);
+  }
+
+  /* //Accordian  */
+  .accordion {
+    border-radius: 3px;
+    cursor: pointer;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+  }
+  
+  /* .active-accordian, .accordion:hover {
+    background-color: #ccc; 
+  } */
+  .accor-button{
+    border-radius: 3px !important;
+    padding: 10px 0px 10px 4px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    background-color: rgb(112, 51, 182);
+  }
+  .panel {
+    width: 100%;
+    display: none;
+    overflow: hidden;
+  }
+  .img-style{
+    width: 24px;
+    border-radius: 2px;
+  }
+  .shortcut span{
+  margin:0px 3px;
+  padding: 4px 2px;
+  cursor: pointer;
+  background-color: rgba(112, 51, 182, 0);
+  border-radius: 3px;
+  color: black;
+  font-weight: 500;
+  transition: all .5s ease-in;
+  }
+  .shortcut span:hover{
+    background-color: rgb(112, 51, 182);
+    color: white;
+  }
+  .checkbox{
+     font-size: 20px;
+  }
+
+
+.list-active{
+  background-color:  rgb(112, 51, 182);
+}
+
+.mail-lists ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.mail-lists ul li{
+  cursor: pointer;
+  padding: 3px 3px;
+  border-bottom: 1px solid rgba(0, 128, 0, 0.37);
+  transition: all .5s ease-in-out;
+}
+.mail-lists ul li:hover{
+  background-color: #cac6c66c;
+}
+.bullet {
+  clip-path: circle(50% at 50% 50%);
+  background-color: green;
+  width: 10px;
+  height: 10px;
+}
+.star {
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  background-color:greenyellow;
+  width: 20px;
+  height: 20px;
+  z-index: 1;
+}
+.starred{
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  background-color:rgb(255, 238, 0);
+  width: 20px;
+  height: 20px;
+  z-index: 10;
+}
+
+.important-mail{
+  color: yellow;
+  background-color: black;
+  border-radius: 5px;
+  padding: 3px 6px;
+}
+.custom-badge{
+  background-color: blue;
+  color: white;
+}
+.user-circle{
+  clip-path: circle(50% at 50% 50%);
+  background-color: coral;
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+.title-mail-list {
+  display: inline-block;
+  width: 150px; /* Adjust the width as needed */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.message-container{
+  padding: .75px 2rem;
+}
+.mail-readMod-container{
+  max-height: 400px;
+  min-height: 400px;
+  overflow-y: scroll;
+
+}
+.description-mail-list {
+  display: inline-block;
+  width: 150px; /* Adjust the width as needed */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mail-readmode-header span{
+  font-size: 16px;
+  margin: 3px 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+  @media (max-width:768px) {
+    .disp{
+      display: block;
+    }
+
+    .menu{
+      position: absolute;
+      top: 0px;
+      max-height: 100vh;
+      overflow-y: scroll;
+    }
+    .mail-main{
+      position: relative;
+    }
+  }

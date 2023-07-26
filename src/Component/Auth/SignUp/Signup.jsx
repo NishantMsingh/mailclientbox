@@ -1,18 +1,11 @@
-import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
 import "./Signup.css";
-
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css'; 
-
-
 import { useRef } from 'react';
-
-
 export default function Signup(props) {
-
  const inputEmail=useRef();
  const inputPass=useRef();
  const inputConfirmPass=useRef();

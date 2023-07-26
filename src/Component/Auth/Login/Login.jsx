@@ -40,6 +40,7 @@ const navigate=useNavigate();
           localStorage.setItem("idToken",data.idToken);
           localStorage.setItem("email",data.email);
           toast.success("Logged in successfully");
+          navigate("/Home");
         } else {
           const errorData = await response.json();
           console.log("Failed to login:", errorData);
@@ -56,7 +57,7 @@ const navigate=useNavigate();
       props.showModal(false);
     }
     props.showModal(false);
-    navigate("/Home");
+   
 };
 
   return (

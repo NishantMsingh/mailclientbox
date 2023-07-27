@@ -1,4 +1,4 @@
-import React, {useState } from "react";
+import React, {useEffect, useState } from "react";
 import "./Home.css";
 import { FcUpLeft } from "react-icons/fc";
 import { RiSpam2Line, RiMessage2Fill } from "react-icons/ri";
@@ -31,11 +31,16 @@ const Home = () => {
   const [iscompose, setCompose] = useState(false);
   const [readmoode, setReadMode] = useState(false);
   const [readmoodeValue, setReadModeValue] = useState("");
-  const [temp, setTemp] = useState([]);
+ 
   const currentDate = new Date();
   const sentMails = useSelector((state) => state.mail.sentMails);
   const allMails = useSelector((state) => state.mail.allMails);
+  const unreadMails = useSelector((state) => state.mail.unreadMails);
   const deletedMails = useSelector((state) => state.mail.deletedMails);
+  const [temp, setTemp] = useState([]);
+  useEffect(()=>{
+    setTemp(allMails);
+  },[allMails]);
   const dispatch=useDispatch();
   const navigate=useNavigate();
   const composehandle = (value) => {
@@ -75,7 +80,8 @@ const Home = () => {
       
                    break;   
       case "Deleted Items":setTemp(deletedMails);
-   
+                   break; 
+       case "Unread":setTemp(unreadMails);
                    break;
       default:setTemp([]);
     }
@@ -93,7 +99,34 @@ const Home = () => {
   const readModeActivehandler=(value)=>{
     setReadMode(true);
     setReadModeValue(value);
-    console.log(value);
+    let temp={
+      ...value,
+      read:true,
+      unread:false
+    }
+      if(value.sender!==localStorage.getItem("email"))
+      {
+        fetch(`https://mail-af7f5-default-rtdb.firebaseio.com/mail/${value.mailId}.json`,{
+        method:"PUT",
+        header:{
+          'Content-Type':"application/json"
+        },
+        body:JSON.stringify(temp)
+      })
+      .then((response)=>{
+        if(!response)
+        {
+          throw new Error("Unable to update the data");
+        }
+        return response.json();
+      })
+      .then((data)=>{
+        console.log(data);
+      })
+      .catch(error=>{
+        console.log(error);
+      })
+      }
   }
   const logoutHandler=()=>{
     localStorage.removeItem("idToken");
@@ -107,7 +140,6 @@ const Home = () => {
   }
   return (
     <div>
-      {/* Header  */}
       <div className="container-fluid home-header-bg">
         <header className="container-fluid pt-2 pb-2 align-items-center d-flex flex-row justify-content-between">
           <div className="">
@@ -170,7 +202,7 @@ const Home = () => {
                   className={activeListItem === "Unread" ? "list-active" : ""}
                   onClick={() => handleItemClick("Unread")}
                 >
-                  Unread
+                  Unread<span className="inbox-mail-count">{unreadMails.length}</span>
                 </li>
                 <li
                   className={activeListItem === "Starred" ? "list-active" : ""}
@@ -301,7 +333,7 @@ const Home = () => {
       {temp.map((value) => (
         <li className="font-weight d-flex align-items-center justify-content-between font-reducer" onClick={()=>{readModeActivehandler(value)}}>
           <input type="checkbox" name="Select" id="Select" />
-          {!value.sent&& !value.delete&&<span className="bullet"></span>}
+          {!value.delete&& !value.read &&<span className="bullet"></span>}
           <span>{value.name}</span>
           <span className={isStarred ? "starred" : "star"} title="Mark as starred" onClick={toggleStar}></span>
           <span className="title-mail-list">
@@ -381,10 +413,10 @@ const Home = () => {
                 
                 <span className="w-100">
                   <div className="d-flex align-items-center justify-content-between">
-                    <span>Google Accounts Team </span>
+                    <span className=" ms-2">Elon Musk</span>
                     <span> {readmoodeValue.time} </span>
                   </div>
-                  <span>to me</span>
+                  <span className=" ms-2">to me</span>
                 </span>
               </div>
 

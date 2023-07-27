@@ -37,7 +37,6 @@ const dispatch=useDispatch();
         subject:subject.current.value,
         mail:plainText,
         read:false,
-        unread:true,
         starred:false,
         time:props.time,
         send:true,
@@ -55,6 +54,7 @@ const dispatch=useDispatch();
     .then(data => {
       // Handle success if needed
       console.log("Mail stored in Firebase:", data);
+      dispatch(mailAction.addMail(mail));
       toast.success("Mail sent successfully");
     })
     .catch(error => {

@@ -4,7 +4,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { EditorState,convertToRaw } from "draft-js";
-
 import { mailAction } from "../../../Store/mail-slice";
 import { useDispatch } from "react-redux";
 
@@ -44,12 +43,26 @@ const dispatch=useDispatch();
         send:true,
         receive:false
       }
-     
+
+  fetch('https://mail-af7f5-default-rtdb.firebaseio.com/mail.json', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(mail),
+  })
+    .then(response => response.json())
+    .then(data => {
+      // Handle success if needed
+      console.log("Mail stored in Firebase:", data);
       toast.success("Mail sent successfully");
-       dispatch(mailAction.addMail(mail));
+    })
+    .catch(error => {
+      // Handle error if needed
+      console.error("Error storing mail in Firebase:", error);
+      toast.error("Failed to send mail. Please try again.");
+    });
       setEditorState("");
-      // props.onClick(false);
-      
   }
 
   return (
@@ -73,8 +86,8 @@ const dispatch=useDispatch();
         <div className="d-flex align-items-center justify-content-between w-100  ps-3 pe-3 pt-2 pb-2  font-weight border-bottom">
           <span>To</span>
           <input type="email" name="email" id="email" className="w90" ref={reciver}/>
-          <span>
-            <a href="#cc">CC</a> <a href="#BCC">BCC</a>
+          <span className="d-flex flex-row">
+            <a href="#cc" className="ms-2">CC</a> <a href="#BCC" className="ms-2">BCC</a>
           </span>
         </div>
         <div className="d-flex align-items-center justify-content-between w-100  ps-3 pe-3 pt-2 pb-2  font-weight border-bottom">

@@ -1,5 +1,5 @@
 .home-header-bg{
-    background-color: blueviolet;
+    background-color: #7859F9;
 }
 
 
@@ -34,7 +34,7 @@
   }
   
   .search-button:hover {
-    background-color: #0056b3;
+    background-color: #9F95FC;
   }
   
   .search-container {
@@ -62,7 +62,7 @@
 }
 .compose{
     width: 100%;
-    background-color:#8A2BE2;
+    background-color:#188FFF;
     border-radius: 3px;
     padding: 10px 0px;
     border:none;
@@ -86,7 +86,7 @@
     border-radius: 3px;
   }
 .menu-list li:hover{
-    background-color: #8A2BE2;
+    background-color: #B6D4FB;
 }
 .container {
     display: inline-block;
@@ -134,7 +134,7 @@
     width: 100%;
     text-align: left;
     border: none;
-    background-color: rgb(112, 51, 182);
+    background-color: #B6D4FB;
   }
   .panel {
     width: 100%;
@@ -160,7 +160,7 @@
   transition: all .5s ease-in;
   }
   .shortcut span:hover{
-    background-color: rgb(112, 51, 182);
+    background-color: #B6D4FB;
     color: white;
   }
   .checkbox{
@@ -169,7 +169,7 @@
 
 
 .list-active{
-  background-color:  rgb(112, 51, 182);
+  background-color:  #B6D4FB;
 }
 
 .mail-lists ul{

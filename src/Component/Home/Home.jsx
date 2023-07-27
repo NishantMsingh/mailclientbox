@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import "./Home.css";
 import { FcUpLeft } from "react-icons/fc";
 import { RiSpam2Line, RiMessage2Fill } from "react-icons/ri";
@@ -301,7 +301,7 @@ const Home = () => {
       {temp.map((value) => (
         <li className="font-weight d-flex align-items-center justify-content-between font-reducer" onClick={()=>{readModeActivehandler(value)}}>
           <input type="checkbox" name="Select" id="Select" />
-          <span className="bullet"></span>
+          {!value.sent&& !value.delete&&<span className="bullet"></span>}
           <span>{value.name}</span>
           <span className={isStarred ? "starred" : "star"} title="Mark as starred" onClick={toggleStar}></span>
           <span className="title-mail-list">

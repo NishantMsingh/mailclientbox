@@ -1,12 +1,14 @@
-#Yahoo Clone Mailbox React App
+**#Yahoo Clone Mailbox React App**
 
 
 ![image](https://github.com/NishantMsingh/mailclientbox/assets/93445529/5226f14d-e17d-4885-af99-d7cde0d9c870)
 
-#Introduction
+**#Introduction**
+
 This is a cool Yahoo Clone Mailbox React App that replicates the popular Yahoo Mail user interface. It is built using React.js, Redux Toolkit, React Icons, React-Bootstrap, Bootstrap 5, and custom CSS for styling. The app also utilizes Firebase as the backend for user authentication and storing user data.
 
-#Features
+**#Features**
+
 User-friendly Yahoo Mail-like interface.
 User authentication using Firebase.
 Fetch API to interact with a backend server for sending and receiving emails.
@@ -14,11 +16,13 @@ Custom CSS and Bootstrap 5 to create a visually appealing design.
 Responsive layout for seamless use on various devices.
 
 
-#Screenshots
+**#Screenshots** 
+
 ![image](https://github.com/NishantMsingh/mailclientbox/assets/93445529/3d291eb0-a82c-479a-9d04-00759d71bee6)
 
 
-#Installation and Usage
+**#Installation and Usage**
+
 Clone the repository to your local machine:
 
 bash

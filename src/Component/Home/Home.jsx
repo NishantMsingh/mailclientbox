@@ -134,9 +134,23 @@ const Home = () => {
     navigate("/");
   }
   const deleteHandler=(value)=>{
-    dispatch(mailAction.removeMail(value));
-    toast.success("Deleted Successfully");
-    setTemp([]);
+  fetch(`https://mail-af7f5-default-rtdb.firebaseio.com/mail/${value.mailId}.json`,{
+    method:"DELETE",
+  }).then((response)=>{
+    if(!response)
+    {
+      throw new Error("Network error");
+    }
+    else
+    {
+      toast.success("Deleted successfully");
+  
+    }
+  }).catch(error=>{
+    console.log(error);
+  })
+  setReadMode(false);
+  setTemp([]);
   }
   return (
     <div>

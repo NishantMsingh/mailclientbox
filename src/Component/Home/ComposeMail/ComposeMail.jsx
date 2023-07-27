@@ -31,7 +31,7 @@ const dispatch=useDispatch();
       .join('\n');
       let sender=localStorage.getItem("email");
       let mail={
-        name:"Unknow",
+        name:"Elon Musk",
         sender,
         reciver:reciver.current.value,
         subject:subject.current.value,

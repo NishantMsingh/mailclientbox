@@ -32,7 +32,7 @@ function App() {
     })
      return;
     }
-   },[]);
+   },[dispatch]);
   return (
     <Routes>
       <Route path="/" element={ <Auth/>} />

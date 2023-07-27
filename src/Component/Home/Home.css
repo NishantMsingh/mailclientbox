@@ -145,6 +145,10 @@
     width: 24px;
     border-radius: 2px;
   } 
+  .img-picka{
+    width: 200px;
+    height: 200px;
+  }
   .user-img{
     width: 50px;
     border-radius: 25px;
@@ -303,3 +307,11 @@
                  border-radius: 5px;
                  color: rgb(226, 136, 136);
                }
+               input[type="checkbox"] {
+                /* Set the desired size using width and height */
+                width: 20px;
+                height: 20px;
+              }
+              
+              /* Optional: Customize the appearance of the checkbox */
+             

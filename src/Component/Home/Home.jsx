@@ -103,7 +103,7 @@ const Home = () => {
     }
       if(value.sender!==localStorage.getItem("email"))
       { setShowModal(true);
-        fetch(`https://mail-af7f5-default-rtdb.firebaseio.com/mail/${value.mailId}.json`,{
+        fetch(`https://mail-client-fac6a-default-rtdb.firebaseio.com/mail/${value.mailId}.json`,{
         method:"PUT",
         header:{
           'Content-Type':"application/json"
@@ -133,7 +133,7 @@ const Home = () => {
   }
   const deleteHandler=(value)=>{
     setShowModal(true);
-  fetch(`https://mail-af7f5-default-rtdb.firebaseio.com/mail/${value.mailId}.json`,{
+  fetch(`https://mail-client-fac6a-default-rtdb.firebaseio.com/mail/${value.mailId}.json`,{
     method:"DELETE",
   }).then((response)=>{
     if(!response)

@@ -17,7 +17,7 @@ export default function Signup(props) {
     email: inputEmail.current.value,
     password: inputPass.current.value,
   };
-  let url = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDarLeXA66hwyltkcH8MzPxhA7oF-AVqMI"; // Replace with your Firebase API key
+  let url = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBWuT9nIns4YjcR6F1qTfx8GhhhVGBu40c"; // Replace with your Firebase API key
   if(inputPass.current.value===inputConfirmPass.current.value && inputPass.current.value !== "" && inputEmail.current.value.indexOf("@"))
     {
       try {
@@ -31,6 +31,8 @@ export default function Signup(props) {
         if (response.ok) {
           const data = await response.json();
           console.log("User ID creation successful:", data);
+
+          alert("Id Created Successfully ! Go to Login section and do login");
         } else {
           const errorData = await response.json();
           console.log("Error creating user ID:", errorData);

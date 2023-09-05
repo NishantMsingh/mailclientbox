@@ -11,7 +11,7 @@ function App() {
     if(isInitialRef.current)
     {
       isInitialRef.current=false;
-    fetch("https://mail-client-fac6a-default-rtdb.firebaseio.com/mail.json")
+    fetch("https://https://mailclientbox-default-rtdb.firebaseio.com//mail.json")
     .then((response)=>{if(!response){ throw new Error("Network issue"); }return response.json();})
     .then((mailData)=>{
       if(mailData)

@@ -23,7 +23,7 @@ const navigate=useNavigate();
     email: inputEmail.current.value,
     password: inputPass.current.value,
   };
-  let url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDarLeXA66hwyltkcH8MzPxhA7oF-AVqMI"; 
+  let url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBWuT9nIns4YjcR6F1qTfx8GhhhVGBu40c"; 
   if(inputPass.current.value !== "" && inputEmail.current.value.indexOf("@"))
     {
       try {

@@ -6,6 +6,7 @@ import { BiArchiveIn } from "react-icons/bi";
 import { FiMoreVertical } from "react-icons/fi";
 import { GoMoveToEnd } from "react-icons/go";
 import { MdOutlineAddTask } from "react-icons/md";
+import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import { AiOutlineStar } from "react-icons/ai";
 import { FaOpencart } from "react-icons/fa";
 import { AiFillDelete, AiOutlineClockCircle } from "react-icons/ai";
@@ -43,7 +44,9 @@ const Home = () => {
   },[allMails]);
   const navigate=useNavigate();
   const composehandle = (value) => {
+    handleMenuClick();
     setCompose(value);
+
   };
   // Function to format the time (hh:mm AM/PM)
   const formatTime = (date) => {
@@ -71,14 +74,16 @@ const Home = () => {
     switch(item)
     {
       case "Inbox":setTemp(allMails);
-                  
+      handleMenuClick();
                    break;
       case "Sent":setTemp(sentMails);
-      
+      handleMenuClick();
                    break;   
       case "Deleted Items":setTemp(deletedMails);
+      handleMenuClick();
                    break; 
        case "Unread":setTemp(unreadMails);
+       handleMenuClick();
                    break;
       default:setTemp([]);
     }
@@ -88,7 +93,10 @@ const Home = () => {
     setIsActive((prevState) => !prevState);
   };
   const handleMenuClick = () => {
-    setIsMenuOpen(!isMenuOpen);
+    if(window.innerWidth<=768)
+    {
+      setIsMenuOpen(!isMenuOpen);
+    }
   };
   const readmodeHandler=()=>{
     setReadMode(false);
@@ -103,7 +111,7 @@ const Home = () => {
     }
       if(value.sender!==localStorage.getItem("email"))
       { setShowModal(true);
-        fetch(`https://https://mailclientbox-default-rtdb.firebaseio.com//mail/${value.mailId}.json`,{
+        fetch(`https://mailclientbox-c312c-default-rtdb.firebaseio.com//mail/${value.mailId}.json`,{
         method:"PUT",
         header:{
           'Content-Type':"application/json"
@@ -133,7 +141,7 @@ const Home = () => {
   }
   const deleteHandler=(value)=>{
     setShowModal(true);
-  fetch(`https://https://mailclientbox-default-rtdb.firebaseio.com//mail/${value.mailId}.json`,{
+  fetch(`https://mailclientbox-c312c-default-rtdb.firebaseio.com//mail/${value.mailId}.json`,{
     method:"DELETE",
   }).then((response)=>{
     if(!response)
@@ -159,12 +167,10 @@ const Home = () => {
           <div className="">
             <div className="text-light font-weight d-flex flex-row align-items-center ">
               <div
-                className={isMenuOpen ? "change  ms-s me-3" : "disp ms-s me-3"}
+                className={isMenuOpen ? "change pointer  ms-s me-3" : "disp ms-s me-3"}
                 onClick={handleMenuClick}
               >
-                <div className="bar1"></div>
-                <div className="bar2"></div>
-                <div className="bar3"></div>
+               <HiOutlineMenuAlt1 fontSize={"2rem"}/>
               </div>{" "}
               <h1> Yahoo!!</h1>{" "}
             </div>{" "}
@@ -189,7 +195,6 @@ const Home = () => {
               </svg>
             </button>
           </div>
-          <div className=""> <button className="logout" onClick={logoutHandler}>Log out</button></div>
         </header>
       </div>
       {/* Header  */}
@@ -209,6 +214,7 @@ const Home = () => {
                 <li
                   className={activeListItem === "Inbox" ? "list-active" : ""}
                   onClick={() => handleItemClick("Inbox")}
+                
                 >
                   Inbox <span className="inbox-mail-count">{allMails.length}</span>
                 </li>
@@ -291,7 +297,9 @@ const Home = () => {
                     Travels
                   </li>
                 </ul>
+                
               </div>
+              
             </div>
 
             {/* 2nd accordian  */}
@@ -312,6 +320,12 @@ const Home = () => {
                 </ul>
               </div>
             </div>
+
+            <ul className="menu-list font-weight mt-1">
+                  <li>
+                  <button className="logout" onClick={logoutHandler}>Log out</button>
+                  </li>
+                </ul>
           </section>
           {!readmoode && (
             <section className="bg-light list col-lg-10 col-md-12 rad">
@@ -451,6 +465,7 @@ const Home = () => {
       {iscompose && (
         <ComposeMail
           onClick={composehandle}
+          composeHandler={setCompose}
           time={formattedDate + " " + formattedTime}
         />
       )}

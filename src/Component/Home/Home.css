@@ -12,7 +12,9 @@
     overflow: hidden;
     max-width: 300px; /* Adjust the width as per your layout */
   }
-  
+  .pointer{
+   cursor: pointer;
+  }
   .search-input {
     flex: 1;
     border: none;

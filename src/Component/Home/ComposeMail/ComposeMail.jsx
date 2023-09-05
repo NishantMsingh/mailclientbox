@@ -43,7 +43,7 @@ const dispatch=useDispatch();
         receive:false
       }
 
-  fetch('https://https://mailclientbox-default-rtdb.firebaseio.com//mail.json', {
+  fetch('https://mailclientbox-c312c-default-rtdb.firebaseio.com//mail.json', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -56,11 +56,13 @@ const dispatch=useDispatch();
       console.log("Mail stored in Firebase:", data);
       dispatch(mailAction.addMail(mail));
       toast.success("Mail sent successfully");
+     setTimeout(()=>{ props.composeHandler(false);},1000);
     })
     .catch(error => {
       // Handle error if needed
       console.error("Error storing mail in Firebase:", error);
       toast.error("Failed to send mail. Please try again.");
+      setTimeout(()=>{ props.composeHandler(false);},1000);
     });
       setEditorState("");
   }
